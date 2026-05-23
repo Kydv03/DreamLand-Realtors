@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMI Calculator — DreamLand Realtors</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f4f6f9;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* ── NAVBAR ── */
+      .navbar-brand {
+        color: #b8860b !important;
+        font-weight: 700;
+        font-size: 1.4rem;
+      }
+      .nav-link {
+        color: #ccc !important;
+      }
+      .nav-link:hover {
+        color: #d4a843 !important;
+      }
+
+      /* ── PAGE HERO ── */
+      .page-hero {
+        background: linear-gradient(135deg, #1a1a1a, #2d2410);
+        padding: 4rem 0 3rem;
+        text-align: center;
+        color: #fff;
+      }
+      .page-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+      .page-hero p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+      }
+      .text-gold {
+        color: #d4a843 !important;
+      }
+
+      /* ── CALCULATOR CARD ── */
+      .calc-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Slider styling */
+      .form-range::-webkit-slider-thumb {
+        background: #b8860b;
+      }
+      .form-range::-moz-range-thumb {
+        background: #b8860b;
+      }
+      .form-range {
+        accent-color: #b8860b;
+      }
+
+      /* Value display next to slider */
+      .slider-value {
+        background: #b8860b;
+        color: #fff;
+        padding: 0.25rem 0.9rem;
+        border-radius: 50px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        min-width: 100px;
+        text-align: center;
+      }
+
+      /* ── RESULT BOX ── */
+      .result-box {
+        background: linear-gradient(135deg, #1a1a1a, #2d2410);
+        border-radius: 14px;
+        padding: 2rem;
+        color: #fff;
+        text-align: center;
+      }
+      .emi-amount {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #d4a843;
+        line-height: 1.1;
+      }
+      .emi-label {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+      }
+
+      /* breakdown rows */
+      .breakdown-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 0.88rem;
+      }
+      .breakdown-row:last-child {
+        border-bottom: none;
+      }
+      .breakdown-row span:first-child {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .breakdown-row span:last-child {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* Pie chart visual */
+      .pie-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 1.5rem 0;
+      }
+      .pie {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        position: relative;
+      }
+      .pie-legend {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 0.35rem;
+      }
+
+      /* ── PRESETS ── */
+      .preset-btn {
+        border: 1.5px solid #e0d8c8;
+        background: #fff;
+        color: #b8860b;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .preset-btn:hover {
+        background: #b8860b;
+        color: #fff;
+        border-color: #b8860b;
+      }
+
+      /* ── AMORTIZATION TABLE ── */
+      .amort-table th {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #888;
+      }
+      .amort-table td {
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg px-4">
+      <a class="navbar-brand" href="index.html">DreamLand Realtors</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#properties">Properties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-gold" href="emi.html"
+              >EMI Calculator</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ── PAGE HERO ── -->
+    <div class="page-hero">
+      <h1>EMI <span class="text-gold">Calculator</span></h1>
+      <p>
+        Plan your home loan repayment easily — adjust loan amount, interest rate
+        and tenure
+      </p>
+    </div>
+
+    <!-- ── MAIN CONTENT ── -->
+    <div class="container py-5">
+      <div class="row g-4 align-items-start">
+        <!-- LEFT — Inputs -->
+        <div class="col-12 col-lg-6">
+          <div class="calc-card">
+            <h5 class="fw-bold mb-4">Loan Details</h5>
+
+            <!-- Quick presets -->
+            <p class="text-muted small mb-2">Quick select property price:</p>
+            <div class="d-flex gap-2 flex-wrap mb-4">
+              <button class="preset-btn" onclick="applyPreset(4500000)">
+                ₹45L Plot
+              </button>
+              <button class="preset-btn" onclick="applyPreset(9200000)">
+                ₹92L Apartment
+              </button>
+              <button class="preset-btn" onclick="applyPreset(18000000)">
+                ₹1.8Cr Villa
+              </button>
+            </div>
+
+            <!-- Loan Amount -->
+            <div class="mb-4">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <label class="fw-semibold">Loan Amount</label>
+                <span class="slider-value" id="loanDisplay">₹50,00,000</span>
+              </div>
+              <input
+                type="range"
+                class="form-range"
+                id="loanSlider"
+                min="500000"
+                max="50000000"
+                step="100000"
+                value="5000000"
+                oninput="updateCalc()"
+              />
+              <div class="d-flex justify-content-between">
+                <small class="text-muted">₹5L</small>
+                <small class="text-muted">₹5Cr</small>
+              </div>
+            </div>
+
+            <!-- Interest Rate -->
+            <div class="mb-4">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <label class="fw-semibold">Interest Rate (per year)</label>
+                <span class="slider-value" id="rateDisplay">8.5%</span>
+              </div>
+              <input
+                type="range"
+                class="form-range"
+                id="rateSlider"
+                min="6"
+                max="20"
+                step="0.1"
+                value="8.5"
+                oninput="updateCalc()"
+              />
+              <div class="d-flex justify-content-between">
+                <small class="text-muted">6%</small>
+                <small class="text-muted">20%</small>
+              </div>
+            </div>
+
+            <!-- Tenure -->
+            <div class="mb-4">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <label class="fw-semibold">Loan Tenure</label>
+                <span class="slider-value" id="tenureDisplay">20 Years</span>
+              </div>
+              <input
+                type="range"
+                class="form-range"
+                id="tenureSlider"
+                min="1"
+                max="30"
+                step="1"
+                value="20"
+                oninput="updateCalc()"
+              />
+              <div class="d-flex justify-content-between">
+                <small class="text-muted">1 Year</small>
+                <small class="text-muted">30 Years</small>
+              </div>
+            </div>
+
+            <a href="index.html#contact" class="btn btn-dark w-100 py-2 mt-2">
+              Talk to Loan Expert →
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT — Results -->
+        <div class="col-12 col-lg-6">
+          <div class="result-box">
+            <!-- Monthly EMI -->
+            <p class="emi-label">Monthly EMI</p>
+            <div class="emi-amount" id="emiResult">₹0</div>
+            <p class="text-white-50 small mt-1 mb-4">
+              per month for <span id="tenureYears">20</span> years
+            </p>
+
+            <!-- Pie chart -->
+            <div class="pie-wrap">
+              <canvas id="pieChart" width="130" height="130"></canvas>
+            </div>
+            <div class="pie-legend">
+              <span
+                ><span class="legend-dot" style="background: #d4a843"></span
+                >Principal</span
+              >
+              <span
+                ><span class="legend-dot" style="background: #555"></span
+                >Interest</span
+              >
+            </div>
+
+            <!-- Breakdown -->
+            <div class="mt-3">
+              <div class="breakdown-row">
+                <span>Principal Amount</span>
+                <span id="principalAmt">₹0</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Total Interest</span>
+                <span id="totalInterest">₹0</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Total Amount Payable</span>
+                <span id="totalPayable">₹0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Amortization table — first 5 years -->
+          <div class="calc-card mt-4">
+            <h6 class="fw-bold mb-3">
+              Year-wise Breakdown
+              <small class="text-muted fw-normal">(first 5 years)</small>
+            </h6>
+            <div class="table-responsive">
+              <table class="table table-hover amort-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Principal Paid</th>
+                    <th>Interest Paid</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="bg-dark text-white text-center py-3 mt-3">
+      <p class="mb-0 small">
+        © 2025 <span class="text-gold">DreamLand Realtors</span> · Gurugram,
+        Haryana · All rights reserved
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // ── Format number as Indian currency ──
+      function formatINR(num) {
+        return "₹" + Math.round(num).toLocaleString("en-IN");
+      }
+
+      // ── Apply preset loan amount ──
+      function applyPreset(amount) {
+        document.getElementById("loanSlider").value = amount;
+        updateCalc();
+      }
+
+      // ── Main calculation function ──
+      function updateCalc() {
+        const P = parseFloat(document.getElementById("loanSlider").value);
+        const r =
+          parseFloat(document.getElementById("rateSlider").value) / 100 / 12; // monthly rate
+        const n = parseInt(document.getElementById("tenureSlider").value) * 12; // total months
+
+        // EMI formula: P * r * (1+r)^n / ((1+r)^n - 1)
+        const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+        const totalPayable = emi * n;
+        const totalInterest = totalPayable - P;
+
+        // Update display values
+        document.getElementById("loanDisplay").innerText = formatINR(P);
+        document.getElementById("rateDisplay").innerText =
+          parseFloat(document.getElementById("rateSlider").value).toFixed(1) +
+          "%";
+        document.getElementById("tenureDisplay").innerText =
+          document.getElementById("tenureSlider").value + " Years";
+        document.getElementById("tenureYears").innerText =
+          document.getElementById("tenureSlider").value;
+
+        document.getElementById("emiResult").innerText = formatINR(emi);
+        document.getElementById("principalAmt").innerText = formatINR(P);
+        document.getElementById("totalInterest").innerText =
+          formatINR(totalInterest);
+        document.getElementById("totalPayable").innerText =
+          formatINR(totalPayable);
+
+        // Draw pie chart
+        drawPie(P, totalInterest);
+
+        // Build amortization table for first 5 years
+        buildAmortTable(P, r, emi, n);
+      }
+
+      // ── Draw pie chart on canvas ──
+      function drawPie(principal, interest) {
+        const canvas = document.getElementById("pieChart");
+        const ctx = canvas.getContext("2d");
+        const total = principal + interest;
+        const pAngle = (principal / total) * 2 * Math.PI;
+        const cx = 65,
+          cy = 65,
+          radius = 55;
+
+        ctx.clearRect(0, 0, 130, 130);
+
+        // Principal slice — gold
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, -Math.PI / 2, -Math.PI / 2 + pAngle);
+        ctx.closePath();
+        ctx.fillStyle = "#d4a843";
+        ctx.fill();
+
+        // Interest slice — dark
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(
+          cx,
+          cy,
+          radius,
+          -Math.PI / 2 + pAngle,
+          -Math.PI / 2 + 2 * Math.PI,
+        );
+        ctx.closePath();
+        ctx.fillStyle = "#555";
+        ctx.fill();
+
+        // Center hole (donut effect)
+        ctx.beginPath();
+        ctx.arc(cx, cy, 30, 0, 2 * Math.PI);
+        ctx.fillStyle = "#1a1a1a";
+        ctx.fill();
+      }
+
+      // ── Build year-wise amortization table ──
+      function buildAmortTable(P, r, emi, totalMonths) {
+        let balance = P;
+        const tbody = document.getElementById("amortBody");
+        tbody.innerHTML = "";
+        const years = Math.min(5, Math.floor(totalMonths / 12));
+
+        for (let y = 1; y <= years; y++) {
+          let yearPrincipal = 0;
+          let yearInterest = 0;
+
+          for (let m = 0; m < 12; m++) {
+            const interestPart = balance * r;
+            const principalPart = emi - interestPart;
+            yearInterest += interestPart;
+            yearPrincipal += principalPart;
+            balance -= principalPart;
+            if (balance < 0) balance = 0;
+          }
+
+          tbody.innerHTML += `
+          <tr>
+            <td>Year ${y}</td>
+            <td>${formatINR(yearPrincipal)}</td>
+            <td>${formatINR(yearInterest)}</td>
+            <td>${formatINR(balance)}</td>
+          </tr>
+        `;
+        }
+      }
+
+      // Run on page load
+      updateCalc();
+    </script>
+  </body>
+</html>
