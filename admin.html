@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — DreamLand Realtors</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f4f6f9;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* ── SIDEBAR ── */
+      .sidebar {
+        width: 240px;
+        min-height: 100vh;
+        background: #1a1a1a;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar-logo {
+        color: #d4a843;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .sidebar-sub {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+      }
+      .sidebar-link {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        padding: 0.6rem 0.8rem;
+        border-radius: 7px;
+        font-size: 0.88rem;
+        display: block;
+        margin-bottom: 0.3rem;
+        transition: all 0.2s;
+      }
+      .sidebar-link:hover,
+      .sidebar-link.active {
+        background: rgba(212, 168, 67, 0.15);
+        color: #d4a843;
+      }
+
+      /* ── MAIN CONTENT ── */
+      .main {
+        margin-left: 240px;
+        padding: 2rem;
+      }
+
+      /* ── STAT CARDS ── */
+      .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .stat-number {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #b8860b;
+      }
+      .stat-label {
+        color: #888;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .stat-icon {
+        font-size: 2rem;
+        opacity: 0.3;
+      }
+
+      /* ── TABLE ── */
+      .table-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-top: 2rem;
+      }
+      .table th {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #888;
+        border-top: none;
+      }
+      .table td {
+        vertical-align: middle;
+        font-size: 0.9rem;
+      }
+      .badge-interest {
+        background: rgba(184, 134, 11, 0.1);
+        color: #b8860b;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.78rem;
+        font-weight: 500;
+      }
+      .btn-delete {
+        background: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+        border: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-delete:hover {
+        background: #dc3545;
+        color: #fff;
+      }
+
+      /* ── SEARCH ── */
+      .search-box {
+        max-width: 280px;
+      }
+
+      /* loading spinner */
+      .spinner {
+        text-align: center;
+        padding: 3rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── SIDEBAR ── -->
+    <div class="sidebar">
+      <div class="sidebar-logo">DreamLand Realtors</div>
+      <div class="sidebar-sub">Admin Panel</div>
+
+      <a href="admin.html" class="sidebar-link active">📋 All Leads</a>
+      <a href="index.html" class="sidebar-link" target="_blank"
+        >🌐 View Website</a
+      >
+
+      <div class="mt-auto">
+        <p style="color: rgba(255, 255, 255, 0.25); font-size: 0.75rem">
+          Logged in as Admin
+        </p>
+      </div>
+    </div>
+
+    <!-- ── MAIN CONTENT ── -->
+    <div class="main">
+      <!-- Page heading -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h4 class="fw-bold mb-0">Enquiry Leads</h4>
+          <p class="text-muted small mb-0">
+            All buyer enquiries submitted through the website
+          </p>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="loadLeads()">
+          🔄 Refresh
+        </button>
+      </div>
+
+      <!-- Stat cards row -->
+      <div class="row g-3 mb-2" id="statsRow">
+        <div class="col-12 col-sm-6 col-md-3">
+          <div
+            class="stat-card d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <div class="stat-number" id="totalCount">—</div>
+              <div class="stat-label">Total Leads</div>
+            </div>
+            <div class="stat-icon">👥</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <div
+            class="stat-card d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <div class="stat-number" id="plotCount">—</div>
+              <div class="stat-label">Plot Enquiries</div>
+            </div>
+            <div class="stat-icon">📐</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <div
+            class="stat-card d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <div class="stat-number" id="villaCount">—</div>
+              <div class="stat-label">Villa Enquiries</div>
+            </div>
+            <div class="stat-icon">🏠</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <div
+            class="stat-card d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <div class="stat-number" id="apartCount">—</div>
+              <div class="stat-label">Apartment Enquiries</div>
+            </div>
+            <div class="stat-icon">🏢</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table card -->
+      <div class="table-card">
+        <!-- Search + filter -->
+        <div
+          class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"
+        >
+          <h6 class="fw-bold mb-0">All Enquiries</h6>
+          <input
+            type="text"
+            class="form-control form-control-sm search-box"
+            placeholder="🔍 Search by name or phone..."
+            oninput="searchLeads(this.value)"
+          />
+        </div>
+
+        <!-- Loading state -->
+        <div class="spinner" id="spinner">Loading leads...</div>
+
+        <!-- Table -->
+        <div class="table-responsive d-none" id="tableWrap">
+          <table class="table table-hover" id="leadsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Interested In</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="leadsBody">
+              <!-- Rows injected by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty state -->
+        <div class="text-center py-5 d-none" id="emptyState">
+          <p class="text-muted">
+            No leads yet. Submit an enquiry from the website first!
+          </p>
+          <a href="index.html" target="_blank" class="btn btn-dark btn-sm"
+            >Go to Website</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      let allLeads = []; // store all leads globally for search
+
+      // ── Load leads from backend ──
+      async function loadLeads() {
+        document.getElementById("spinner").classList.remove("d-none");
+        document.getElementById("tableWrap").classList.add("d-none");
+        document.getElementById("emptyState").classList.add("d-none");
+
+        try {
+          const response = await fetch("/leads");
+          allLeads = await response.json();
+
+          updateStats(allLeads);
+          renderTable(allLeads);
+        } catch (error) {
+          document.getElementById("spinner").innerHTML =
+            "❌ Could not load leads. Make sure server is running.";
+        }
+      }
+
+      // ── Update stat numbers ──
+      function updateStats(leads) {
+        document.getElementById("totalCount").innerText = leads.length;
+        document.getElementById("plotCount").innerText = leads.filter(
+          (l) => l.interest && l.interest.toLowerCase().includes("plot"),
+        ).length;
+        document.getElementById("villaCount").innerText = leads.filter(
+          (l) => l.interest && l.interest.toLowerCase().includes("villa"),
+        ).length;
+        document.getElementById("apartCount").innerText = leads.filter(
+          (l) => l.interest && l.interest.toLowerCase().includes("apartment"),
+        ).length;
+      }
+
+      // ── Render table rows ──
+      function renderTable(leads) {
+        document.getElementById("spinner").classList.add("d-none");
+
+        if (leads.length === 0) {
+          document.getElementById("emptyState").classList.remove("d-none");
+          return;
+        }
+
+        document.getElementById("tableWrap").classList.remove("d-none");
+        const tbody = document.getElementById("leadsBody");
+        tbody.innerHTML = "";
+
+        // Show newest first
+        [...leads].reverse().forEach((lead, index) => {
+          const date = new Date(lead.date).toLocaleDateString("en-IN");
+          const row = `
+          <tr id="row-${lead._id}">
+            <td class="text-muted">${index + 1}</td>
+            <td><strong>${lead.name || "—"}</strong></td>
+            <td>${lead.phone || "—"}</td>
+            <td>${lead.email || "—"}</td>
+            <td><span class="badge-interest">${lead.interest || "Not specified"}</span></td>
+            <td class="text-muted" style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              ${lead.message || "—"}
+            </td>
+            <td class="text-muted">${date}</td>
+            <td>
+              <button class="btn-delete" onclick="deleteLead('${lead._id}')">🗑️ Delete</button>
+            </td>
+          </tr>
+        `;
+          tbody.innerHTML += row;
+        });
+      }
+
+      // ── Search leads ──
+      function searchLeads(query) {
+        const q = query.toLowerCase();
+        const filtered = allLeads.filter(
+          (lead) =>
+            (lead.name && lead.name.toLowerCase().includes(q)) ||
+            (lead.phone && lead.phone.includes(q)),
+        );
+        renderTable(filtered);
+      }
+
+      // ── Delete a lead ──
+      async function deleteLead(id) {
+        if (!confirm("Delete this lead? This cannot be undone.")) return;
+        try {
+          const response = await fetch("/leads/" + id, { method: "DELETE" });
+          const result = await response.json();
+          if (result.success) {
+            // Remove row from table without reloading
+            document.getElementById("row-" + id).remove();
+            allLeads = allLeads.filter((l) => l._id !== id);
+            updateStats(allLeads);
+          }
+        } catch (error) {
+          alert("Could not delete. Try again.");
+        }
+      }
+
+      // Load leads when page opens
+      loadLeads();
+    </script>
+  </body>
+</html>

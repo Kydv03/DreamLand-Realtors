@@ -1,0 +1,220 @@
+/* ================================================
+   style.css — DreamLand Realtors
+   Only styles that Bootstrap cannot do
+   ================================================ */
+
+/* ── NAVBAR ── */
+.navbar-brand {
+  color: #b8860b !important;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+.nav-link {
+  color: #ccc !important;
+}
+.nav-link:hover {
+  color: #d4a843 !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80")
+      center / cover no-repeat;
+  display: flex;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-block;
+  border: 1px solid #d4a843;
+  color: #d4a843;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 1.2rem;
+  border-radius: 50px;
+}
+.hero-sub {
+  max-width: 500px;
+}
+.text-gold {
+  color: #d4a843 !important;
+}
+.hero-stats .col-auto {
+  padding: 0 2rem;
+}
+
+/* ── PROPERTIES SECTION ── */
+
+/* Small label above section heading */
+.section-label {
+  color: #b8860b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* Card image container — needed for badge positioning */
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fix image height so all cards look uniform */
+.card-img-wrap img {
+  height: 210px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Zoom image on card hover */
+.property-card:hover .card-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Badge sits on top of image — top left corner */
+.card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+}
+
+/* Lift card on hover */
+.property-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ── CONTACT SECTION ── */
+.contact-section {
+  background-color: #f8f3ea;
+}
+
+/* Gold square icon box */
+.info-icon {
+  width: 42px;
+  height: 42px;
+  background-color: #b8860b;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ══════════════════════════════════════
+   AI CHATBOT STYLES (Step 7)
+══════════════════════════════════════ */
+
+/* Floating bubble button — bottom right */
+.chat-bubble {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #b8860b;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: transform 0.2s;
+}
+.chat-bubble:hover {
+  transform: scale(1.1);
+}
+
+/* Chat box — hidden by default */
+.chat-box {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 340px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 998;
+  display: none; /* hidden */
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Show chat box when .chat-open class is added */
+.chat-box.chat-open {
+  display: flex;
+}
+
+/* Dark header */
+.chat-header {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Messages area — scrollable */
+.chat-messages {
+  padding: 1rem;
+  height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #f8f8f8;
+}
+
+/* Individual message bubble */
+.msg {
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  max-width: 85%;
+  line-height: 1.5;
+}
+
+/* AI message — left side, light background */
+.ai-msg {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  align-self: flex-start;
+}
+
+/* User message — right side, gold background */
+.user-msg {
+  background: #b8860b;
+  color: #fff;
+  align-self: flex-end;
+}
+
+/* Input row at bottom */
+.chat-input {
+  display: flex;
+  padding: 0.75rem;
+  border-top: 1px solid #eee;
+  background: #fff;
+}

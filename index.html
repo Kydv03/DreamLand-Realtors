@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DreamLand Realtors</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg px-4">
+      <a class="navbar-brand" href="#">DreamLand Realtors</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#properties">Properties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="container text-center text-white">
+        <span class="hero-badge">Gurugram's trusted realtors since 2010</span>
+        <h1 class="display-3 fw-bold mt-3">
+          Find Your <span class="text-gold">Dream</span><br />Property Today
+        </h1>
+        <p class="lead mx-auto mt-3 hero-sub">
+          Premium plots and homes across Gurugram and Haryana — clear titles,
+          EMI options, and transparent deals.
+        </p>
+        <a
+          href="#properties"
+          class="btn btn-warning text-dark fw-semibold px-4 py-2 me-2"
+          >Browse Properties</a
+        >
+        <a href="#contact" class="btn btn-outline-light px-4 py-2"
+          >Talk to an Expert</a
+        >
+        <div class="row justify-content-center mt-5 hero-stats">
+          <div class="col-auto text-center">
+            <strong class="d-block fs-1 text-gold">500+</strong>
+            <span class="text-white-50 small text-uppercase"
+              >Properties Sold</span
+            >
+          </div>
+          <div class="col-auto text-center">
+            <strong class="d-block fs-1 text-gold">14+</strong>
+            <span class="text-white-50 small text-uppercase"
+              >Years of Trust</span
+            >
+          </div>
+          <div class="col-auto text-center">
+            <strong class="d-block fs-1 text-gold">100%</strong>
+            <span class="text-white-50 small text-uppercase">Clear Titles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROPERTIES ── -->
+    <section id="properties" class="py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <p class="section-label">Our Properties</p>
+          <h2 class="fw-bold">Featured Listings</h2>
+          <p class="text-muted">
+            Carefully selected plots and homes across premium locations.
+          </p>
+        </div>
+        <div class="text-center mb-4">
+          <button
+            class="btn btn-dark btn-sm me-2"
+            onclick="filterCards(this, 'all')"
+          >
+            All
+          </button>
+          <button
+            class="btn btn-outline-dark btn-sm me-2"
+            onclick="filterCards(this, 'plot')"
+          >
+            Plots
+          </button>
+          <button
+            class="btn btn-outline-dark btn-sm me-2"
+            onclick="filterCards(this, 'villa')"
+          >
+            Villas
+          </button>
+          <button
+            class="btn btn-outline-dark btn-sm"
+            onclick="filterCards(this, 'apartment')"
+          >
+            Apartments
+          </button>
+        </div>
+        <div class="row g-4" id="propertyGrid">
+          <div class="col-12 col-sm-6 col-md-4 property-item" data-type="plot">
+            <div class="card h-100 shadow-sm property-card">
+              <div class="card-img-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80"
+                  class="card-img-top"
+                  alt="Plot"
+                />
+                <span class="badge bg-warning text-dark card-badge"
+                  >Available</span
+                >
+              </div>
+              <div class="card-body">
+                <p class="text-gold small text-uppercase fw-semibold mb-1">
+                  📍 Sector 95, Gurugram
+                </p>
+                <h5 class="card-title fw-bold">Premium Residential Plot</h5>
+                <p class="text-muted small mb-3">
+                  📐 200 sq yd &nbsp;|&nbsp; ✅ 7/12 Clear &nbsp;|&nbsp; 💳 EMI
+                  Available
+                </p>
+              </div>
+              <div
+                class="card-footer bg-white d-flex justify-content-between align-items-center"
+              >
+                <span class="fs-5 fw-bold text-gold"
+                  >₹45L
+                  <small class="text-muted fw-normal fs-6">onwards</small></span
+                >
+                <a href="#contact" class="btn btn-dark btn-sm px-3">Enquire</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 property-item" data-type="villa">
+            <div class="card h-100 shadow-sm property-card">
+              <div class="card-img-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80"
+                  class="card-img-top"
+                  alt="Villa"
+                />
+                <span class="badge bg-danger card-badge">Hot Deal</span>
+              </div>
+              <div class="card-body">
+                <p class="text-gold small text-uppercase fw-semibold mb-1">
+                  📍 Sohna Road, Gurugram
+                </p>
+                <h5 class="card-title fw-bold">Luxury Independent Villa</h5>
+                <p class="text-muted small mb-3">
+                  📐 350 sq yd &nbsp;|&nbsp; 🏠 4 BHK &nbsp;|&nbsp; 💳 EMI
+                  Available
+                </p>
+              </div>
+              <div
+                class="card-footer bg-white d-flex justify-content-between align-items-center"
+              >
+                <span class="fs-5 fw-bold text-gold"
+                  >₹1.8Cr
+                  <small class="text-muted fw-normal fs-6">onwards</small></span
+                >
+                <a href="#contact" class="btn btn-dark btn-sm px-3">Enquire</a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6 col-md-4 property-item"
+            data-type="apartment"
+          >
+            <div class="card h-100 shadow-sm property-card">
+              <div class="card-img-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80"
+                  class="card-img-top"
+                  alt="Apartment"
+                />
+                <span class="badge bg-success card-badge">New Launch</span>
+              </div>
+              <div class="card-body">
+                <p class="text-gold small text-uppercase fw-semibold mb-1">
+                  📍 DLF Phase 2, Gurugram
+                </p>
+                <h5 class="card-title fw-bold">Modern 3 BHK Apartment</h5>
+                <p class="text-muted small mb-3">
+                  📐 1450 sq ft &nbsp;|&nbsp; 🏠 3 BHK &nbsp;|&nbsp; 🏦 Bank
+                  Loan Ready
+                </p>
+              </div>
+              <div
+                class="card-footer bg-white d-flex justify-content-between align-items-center"
+              >
+                <span class="fs-5 fw-bold text-gold"
+                  >₹92L
+                  <small class="text-muted fw-normal fs-6">onwards</small></span
+                >
+                <a href="#contact" class="btn btn-dark btn-sm px-3">Enquire</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact" class="py-5 contact-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="fw-bold">Send an Enquiry</h2>
+          <p class="text-muted">
+            Fill the form below — our expert will call you within 24 hours.
+          </p>
+        </div>
+        <div class="row g-5 align-items-start">
+          <div class="col-12 col-md-5">
+            <h4 class="fw-bold mb-4">Let's Find Your<br />Perfect Property</h4>
+            <p class="text-muted mb-4">
+              No spam, no pressure — just honest advice from our experienced
+              team.
+            </p>
+            <div class="d-flex align-items-start mb-4">
+              <div class="info-icon me-3">📞</div>
+              <div>
+                <p class="fw-semibold mb-0">Phone</p>
+                <p class="text-muted mb-0">+91 98765 43210</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-4">
+              <div class="info-icon me-3">📧</div>
+              <div>
+                <p class="fw-semibold mb-0">Email</p>
+                <p class="text-muted mb-0">info@dreamlandrealtors.in</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-4">
+              <div class="info-icon me-3">📍</div>
+              <div>
+                <p class="fw-semibold mb-0">Office</p>
+                <p class="text-muted mb-0">
+                  Sector 14, Gurugram, Haryana – 122001
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-7">
+            <div class="card shadow-sm p-4 border-0">
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <label class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    id="fname"
+                    class="form-control"
+                    placeholder="Rahul"
+                  />
+                </div>
+                <div class="col-6">
+                  <label class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    id="lname"
+                    class="form-control"
+                    placeholder="Sharma"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="rahul@email.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Interested In</label>
+                <select id="interest" class="form-select">
+                  <option value="">Select property type</option>
+                  <option>Residential Plot</option>
+                  <option>Independent Villa</option>
+                  <option>Apartment / Flat</option>
+                  <option>Commercial Property</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea
+                  id="message"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Tell us your budget, location preference..."
+                ></textarea>
+              </div>
+              <button class="btn btn-dark w-100 py-2" onclick="submitForm()">
+                Send Enquiry →
+              </button>
+              <div id="successMsg" class="alert alert-success mt-3 d-none">
+                ✅ Enquiry submitted! We'll call you within 24 hours.
+              </div>
+              <div id="errorMsg" class="alert alert-danger mt-3 d-none">
+                ❌ Something went wrong. Please try again.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="bg-dark text-white text-center py-3">
+      <p class="mb-0 small">
+        © 2025 <span class="text-gold">DreamLand Realtors</span> · Gurugram,
+        Haryana · All rights reserved
+      </p>
+    </footer>
+
+    <!-- ══════════════════════════════════════
+       AI CHATBOT WIDGET (NEW - Step 7)
+       This floats on bottom right corner
+  ══════════════════════════════════════ -->
+
+    <!-- Chat bubble button -->
+    <button class="chat-bubble" onclick="toggleChat()">💬</button>
+
+    <!-- Chat box -->
+    <div class="chat-box" id="chatBox">
+      <!-- Chat header -->
+      <div class="chat-header">
+        <div>
+          <strong>DreamLand AI Assistant</strong>
+          <p class="mb-0" style="font-size: 0.75rem; opacity: 0.8">
+            Ask me anything about properties!
+          </p>
+        </div>
+        <button
+          onclick="toggleChat()"
+          class="btn-close btn-close-white"
+        ></button>
+      </div>
+
+      <!-- Chat messages area -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- First message from AI -->
+        <div class="msg ai-msg">
+          👋 Hi! I'm DreamLand's AI assistant. Ask me about our properties,
+          prices, EMI options, or locations!
+        </div>
+      </div>
+
+      <!-- Chat input area -->
+      <div class="chat-input">
+        <input
+          type="text"
+          id="chatInput"
+          class="form-control"
+          placeholder="Type your question..."
+          onkeypress="handleEnter(event)"
+        />
+        <button class="btn btn-dark ms-2" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // ── Filter property cards ──
+      function filterCards(btn, type) {
+        document.querySelectorAll("#properties .btn").forEach((b) => {
+          b.classList.remove("btn-dark");
+          b.classList.add("btn-outline-dark");
+        });
+        btn.classList.remove("btn-outline-dark");
+        btn.classList.add("btn-dark");
+        document.querySelectorAll(".property-item").forEach((card) => {
+          card.style.display =
+            type === "all" || card.dataset.type === type ? "block" : "none";
+        });
+      }
+
+      // ── Submit enquiry form ──
+      async function submitForm() {
+        const fname = document.getElementById("fname").value.trim();
+        const lname = document.getElementById("lname").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const interest = document.getElementById("interest").value;
+        const message = document.getElementById("message").value.trim();
+        if (!fname || !phone) {
+          alert("Please fill in at least your name and phone number.");
+          return;
+        }
+        const formData = {
+          name: fname + " " + lname,
+          phone,
+          email,
+          interest,
+          message,
+        };
+        try {
+          const response = await fetch("/enquiry", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+          const result = await response.json();
+          if (result.success) {
+            document.getElementById("successMsg").classList.remove("d-none");
+            document.getElementById("errorMsg").classList.add("d-none");
+            ["fname", "lname", "phone", "email", "interest", "message"].forEach(
+              (id) => {
+                document.getElementById(id).value = "";
+              },
+            );
+          }
+        } catch (error) {
+          document.getElementById("errorMsg").classList.remove("d-none");
+        }
+      }
+
+      // ══════════════════════════════════════
+      //  AI CHATBOT FUNCTIONS (NEW)
+      // ══════════════════════════════════════
+
+      // Open / close chat box
+      function toggleChat() {
+        const box = document.getElementById("chatBox");
+        box.classList.toggle("chat-open");
+      }
+
+      // Send message when Enter key is pressed
+      function handleEnter(event) {
+        if (event.key === "Enter") sendMessage();
+      }
+
+      // Main function — sends message to server, gets AI reply
+      async function sendMessage() {
+        const input = document.getElementById("chatInput");
+        const message = input.value.trim();
+
+        // Don't send empty messages
+        if (!message) return;
+
+        // Show user's message in chat
+        addMessage(message, "user");
+        input.value = "";
+
+        // Show "Typing..." while waiting for AI
+        addMessage("Typing...", "ai", "typingMsg");
+
+        try {
+          // Send message to our backend /chat route
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: message }),
+          });
+
+          const result = await response.json();
+
+          // Remove "Typing..." and show real reply
+          const typing = document.getElementById("typingMsg");
+          if (typing) typing.remove();
+
+          addMessage(result.reply, "ai");
+        } catch (error) {
+          const typing = document.getElementById("typingMsg");
+          if (typing) typing.remove();
+          addMessage("Sorry, something went wrong. Please try again.", "ai");
+        }
+      }
+
+      // Helper — adds a message bubble to the chat
+      function addMessage(text, sender, id = "") {
+        const messages = document.getElementById("chatMessages");
+        const div = document.createElement("div");
+        div.className = "msg " + (sender === "user" ? "user-msg" : "ai-msg");
+        if (id) div.id = id;
+        div.innerText = text;
+        messages.appendChild(div);
+        // Auto scroll to latest message
+        messages.scrollTop = messages.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
