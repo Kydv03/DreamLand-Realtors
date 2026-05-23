@@ -23,8 +23,7 @@ const groq = new Groq({ apiKey: GROQ_KEY });
 // ── Middleware ──
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname));
-
+app.use(express.static(path.join(__dirname)));
 // ── MongoDB Schema & Model ──
 const leadSchema = new mongoose.Schema({
   name: String,
